@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WILL YOU ?</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #020617; /* Deep midnight base */
+        margin: 0;
+        overflow: hidden; 
+        color: #f8fafc;
+      }
+      .font-serif-italic {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+      }
+      .font-serif {
+        font-family: 'Playfair Display', serif;
+      }
+      
+      .soft-glow {
+        box-shadow: 0 0 30px rgba(56, 189, 248, 0.15);
+      }
+      
+      /* ✨ STAR TWINKLE: Different sizes have different pulses */
+      @keyframes twinkle {
+        0%, 100% { opacity: 0.1; transform: scale(0.6); }
+        50% { opacity: 0.8; transform: scale(1); }
+      }
+      .star {
+        position: absolute;
+        background: white;
+        border-radius: 50%;
+        animation: twinkle var(--duration) ease-in-out infinite;
+        animation-delay: var(--delay);
+        pointer-events: none;
+      }
+
+      /* ✨ NEBULA DRIFT: Slow moving background color clouds */
+      @keyframes nebula-pulse {
+        0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.2; }
+        33% { transform: scale(1.2) translate(4%, -4%); opacity: 0.4; }
+        66% { transform: scale(0.85) translate(-4%, 4%); opacity: 0.25; }
+      }
+      .nebula {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(160px); /* Increased blur for a softer, more atmospheric look */
+        mix-blend-mode: screen;
+        animation: nebula-pulse 25s ease-in-out infinite;
+        pointer-events: none;
+      }
+
+      /* ✨ STAR DUST: Tiny drifting specks */
+      @keyframes stardust-drift {
+        0% { transform: translate(0, 0); opacity: 0; }
+        20% { opacity: 0.3; }
+        80% { opacity: 0.3; }
+        100% { transform: translate(100px, -100px); opacity: 0; }
+      }
+      .stardust {
+        position: absolute;
+        background: white;
+        border-radius: 50%;
+        opacity: 0;
+        animation: stardust-drift 30s linear infinite;
+        pointer-events: none;
+      }
+      
+      @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-10px) rotate(1deg); }
+      }
+      .float-anim {
+        animation: float 5s ease-in-out infinite;
+      }
+
+      /* Pulse for the pause moment */
+      @keyframes soft-pulse {
+        0%, 100% { opacity: 0.3; }
+        50% { opacity: 0.6; }
+      }
+      .animate-pulse {
+        animation: soft-pulse 4s ease-in-out infinite;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-[#020617]">
+    <div id="root"></div>
+
+    <!-- 🎵 BACKGROUND MUSIC SECTION -->
+    <script>
+      (function() {
+        const musicPath = "./audio/background.mp4";
+        const bgMusic = new Audio();
+        bgMusic.src = musicPath;
+        bgMusic.loop = true;
+        bgMusic.volume = 0.35;
+        bgMusic.preload = "auto";
+
+        const startAudio = () => {
+          bgMusic.play().then(() => {
+            window.removeEventListener('click', startAudio);
+            window.removeEventListener('touchstart', startAudio);
+            window.removeEventListener('keydown', startAudio);
+          }).catch(err => {
+            console.log("Waiting for user interaction for audio playback...");
+          });
+        };
+
+        window.addEventListener('click', startAudio);
+        window.addEventListener('touchstart', startAudio);
+        window.addEventListener('keydown', startAudio);
+        
+        startAudio();
+      })();
+    </script>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
